@@ -92,19 +92,18 @@ The game concludes after a set number of rounds or once all leases are drilled. 
   "funds": "number",
   "oilTokens": "number",
   "leasesOwned": ["leaseId"],
-  "currentBid": "number" // if in an active auction
-  // Additional stats as needed
+  "currentBid": "number"
 }
 
 B. Oil Lease Object
 
 {
   "id": "string",
-  "location": { "x": "number", "y": "number" }, // For board mapping
+  "location": { "x": "number", "y": "number" },
   "baseCost": "number",
   "drilled": "boolean",
-  "hiddenPotential": "number", // Could influence drilling success
-  "currentInvestment": "number", // Amount invested in drilling
+  "hiddenPotential": "number", 
+  "currentInvestment": "number", 
   "ownerId": "string | null"
 }
 
@@ -117,7 +116,7 @@ C. Auction Object
   "bidHistory": [
     { "bidderId": "string", "bidAmount": "number" }
   ]
-  // Timing and turn management data if needed
+  
 }
 
 D. Drilling Outcome Object
@@ -126,8 +125,8 @@ D. Drilling Outcome Object
   "leaseId": "string",
   "investment": "number",
   "success": "boolean",
-  "oilYield": "number", // Tokens awarded on success
-  "rollResult": "number" // For dice or card outcome details
+  "oilYield": "number", 
+  "rollResult": "number" 
 }
 
 E. Oil Market Object
@@ -137,7 +136,7 @@ E. Oil Market Object
   "priceHistory": [
     { "round": "number", "price": "number" }
   ]
-  // Algorithm parameters, volatility factors, etc.
+  
 }
 
 4. User Interface (UI) and User Experience (UX)
