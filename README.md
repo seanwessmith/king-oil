@@ -85,7 +85,8 @@ The game concludes after a set number of rounds or once all leases are drilled. 
 ## 3. Data Structures and Entities
 
 ### A. Player Object
-```json
+```typescript
+// A. Player Object
 {
   "id": "string",
   "name": "string",
@@ -95,7 +96,7 @@ The game concludes after a set number of rounds or once all leases are drilled. 
   "currentBid": "number"
 }
 
-B. Oil Lease Object
+// B. Oil Lease Object
 
 {
   "id": "string",
@@ -107,7 +108,7 @@ B. Oil Lease Object
   "ownerId": "string | null"
 }
 
-C. Auction Object
+// C. Auction Object
 
 {
   "leaseId": "string",
@@ -119,7 +120,7 @@ C. Auction Object
   
 }
 
-D. Drilling Outcome Object
+// D. Drilling Outcome Object
 
 {
   "leaseId": "string",
@@ -129,7 +130,7 @@ D. Drilling Outcome Object
   "rollResult": "number" 
 }
 
-E. Oil Market Object
+// E. Oil Market Object
 
 {
   "currentPrice": "number",
@@ -138,42 +139,43 @@ E. Oil Market Object
   ]
   
 }
+```
 
-4. User Interface (UI) and User Experience (UX)
+## 4. User Interface (UI) and User Experience (UX)
 
-A. Main Game Dashboard
+### A. Main Game Dashboard
 	•	Overview Panel: Displays current oil market price, round number, and global announcements (e.g., phase changes).
 	•	Player Stats: List of players with current funds, oil tokens, and owned leases.
 	•	Action Panel: Buttons for bidding, drilling, and selling oil (depending on the game phase).
 
-B. Auction Interface
+### B. Auction Interface
 	•	Lease Display: Visual representation of the lease up for auction.
 	•	Bidding Input: Input field for entering bids, current highest bid display, and bid history log.
 	•	Timer/Phase Indicator: If using timed auctions, show remaining time.
 
-C. Drilling Interface
+### C. Drilling Interface
 	•	Investment Slider/Input: Allow players to choose their investment amount.
 	•	Outcome Animation: Visual representation of the drilling process (e.g., drilling rig animation, dice roll).
 	•	Result Display: Clear notification of success or failure and the resulting oil yield.
 
-D. Oil Market & Sales Interface
+### D. Oil Market & Sales Interface
 	•	Market Price Display: Real-time graph or indicator showing price trends.
 	•	Sell Options: Interface for players to select how much oil to sell.
 	•	Transaction History: Record of past sales and revenue generated.
 
-E. Game Board
+### E. Game Board
 	•	Visual Map: Interactive board showing all lease blocks.
 	•	Lease Status Indicators: Visual markers for available, auctioned, drilled, or owned leases.
 	•	Tooltips/Info Pop-ups: Provide details when hovering or clicking on a lease block.
 
-F. Multiplayer Features (if applicable)
+### F. Multiplayer Features (if applicable)
 	•	Lobby/Matchmaking: Create or join games.
 	•	Chat Functionality: Real-time messaging for player interaction.
 	•	Turn Indicators: Clear prompts showing whose turn it is during each phase.
 
-5. Backend Architecture and Implementation
+## 5. Backend Architecture and Implementation
 
-A. Server-Side Game Engine
+### A. Server-Side Game Engine
 	•	Core Responsibilities:
 	•	Manage game state (current phase, player data, lease statuses, oil market price).
 	•	Validate actions (bids, investments, sales) to prevent cheating.
@@ -181,7 +183,7 @@ A. Server-Side Game Engine
 	•	Real-Time Communication:
 	•	Use WebSockets (e.g., with Socket.IO) to push game state updates to all connected clients.
 
-B. API Endpoints
+### B. API Endpoints
 	•	Examples:
 	•	POST /game/start – Initialize a new game session.
 	•	POST /auction/bid – Submit a bid.
@@ -189,61 +191,61 @@ B. API Endpoints
 	•	POST /market/sell – Execute oil sale.
 	•	GET /game/state – Retrieve current game state (for reconnects or spectators).
 
-C. Data Persistence
+### C. Data Persistence
 	•	Database: Use a relational (e.g., PostgreSQL) or NoSQL (e.g., MongoDB) database to store ongoing game sessions, player profiles, and game history.
 	•	Session Management: Ensure that game sessions can be saved and resumed.
 
-6. Game Mechanics & Business Logic
+## 6. Game Mechanics & Business Logic
 
-A. Bidding Rules
+### A. Bidding Rules
 	•	Bid Increments: Define a minimum increment for successive bids.
 	•	Bid Validation: Check that the player has sufficient funds for the bid.
 	•	Auction Closure: Determine when an auction ends (e.g., after a timer runs out or when no higher bid is received).
 
-B. Drilling Probability Calculation
+### B. Drilling Probability Calculation
 	•	Investment Influence: Model a probability function where higher investment increases the chance of a successful drilling outcome.
 	•	Example: Base success probability might start at 20%, increasing by 5% per unit of investment, up to a maximum cap.
 	•	Random Outcome Generation: Use a server-side random number generator (e.g., simulating a dice roll or drawing a card) to determine success.
 	•	Yield Determination: If successful, calculate the yield (number of oil tokens) based on both investment and the lease’s hidden potential.
 
-C. Oil Market Fluctuations
+### C. Oil Market Fluctuations
 	•	Algorithm: Develop a simple algorithm that adjusts the oil price each round (e.g., random percentage change within a defined range).
 	•	Consider including trends or events that can influence prices for added strategy.
 	•	Player Impact: Allow players to choose the optimal time to sell oil based on market trends.
 
-D. End Game & Scoring
+### D. End Game & Scoring
 	•	Final Calculation: Tally cash on hand, market value of oil tokens (using the final oil price), and any residual asset values.
 	•	Winner Declaration: Announce the player with the highest net worth as the winner.
 
-7. Technical Stack Suggestions
+## 7. Technical Stack Suggestions
 
-A. Frontend
+### A. Frontend
 	•	Frameworks/Libraries: React, Vue, or Angular for building interactive UI components.
 	•	State Management: Redux, Vuex, or Context API for managing game state on the client side.
 	•	Real-Time Updates: WebSocket libraries (e.g., Socket.IO client) for live game interactions.
 
-B. Backend
+### B. Backend
 	•	Server Environment: Node.js with Express for API endpoints and WebSocket integration.
 	•	Real-Time Communication: Socket.IO or similar libraries to push state changes to clients.
 	•	Database: PostgreSQL, MySQL, or MongoDB depending on your data model preference.
 
-C. Deployment & Scaling
+### C. Deployment & Scaling
 	•	Hosting: Cloud services (e.g., AWS, Heroku, or DigitalOcean) to host your backend and database.
 	•	Load Balancing: Consider using load balancers if supporting many simultaneous multiplayer games.
 
-8. Additional Considerations
+## 8. Additional Considerations
 
-A. Security
+### A. Security
 	•	Authentication: Implement user accounts or guest login with session management.
 	•	Cheating Prevention: Validate all game actions on the server side.
 	•	Randomness: Use secure, server-side random number generation.
 
-B. Testing & Quality Assurance
+### B. Testing & Quality Assurance
 	•	Unit Testing: Test individual game logic functions (bidding, drilling outcome calculations, market updates).
 	•	Integration Testing: Simulate complete game sessions, especially for multiplayer scenarios.
 	•	UI/UX Testing: Ensure the interface is intuitive, responsive, and provides clear feedback to players.
 
-C. Additional Features (Future Enhancements)
+### C. Additional Features (Future Enhancements)
 	•	Tutorial Mode: Step-by-step introduction for new players.
 	•	AI Opponents: Create AI players for single-player mode.
 	•	Game History & Analytics: Track game statistics for replay or post-game analysis.
